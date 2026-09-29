@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Zona privada</title><link rel="stylesheet" href="/styles.css"></head>
+<body>
+  <h1>Zona privada</h1>
+  <p>Bienvenido, <strong><%= user.username %></strong>. Tu rol es <em><%= user.role %></em>.</p>
+  <% if (user.role === 'admin') { %>
+    <p>Como admin puedes gestionar recursos y ver todas las reservas.</p>
+  <% } else { %>
+    <p>Puedes crear y gestionar tus propias reservas.</p>
+  <% } %>
+  <a href="/profile">Ver perfil</a> · <a href="/">Inicio</a>
+</body>
+</html>

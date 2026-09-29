@@ -1,0 +1,46 @@
+@host = http://localhost:3000
+
+### Registro (el primero es admin)
+POST {{host}}/register
+Content-Type: application/json
+
+{ "username": "admin", "password": "123456" }
+
+### Login
+POST {{host}}/login
+Content-Type: application/json
+
+{ "username": "admin", "password": "123456" }
+
+### Sin token → 401 (prueba en una ventana sin cookie)
+GET {{host}}/resources
+
+### Crear recurso (admin)
+POST {{host}}/resources
+Content-Type: application/json
+
+{ "name": "Sala B", "description": "Capacidad 4" }
+
+### Crear reserva
+POST {{host}}/bookings
+Content-Type: application/json
+
+{ "resourceId": 1, "start": "2026-12-01T10:00:00Z", "end": "2026-12-01T11:00:00Z" }
+
+### Solapamiento → 409
+POST {{host}}/bookings
+Content-Type: application/json
+
+{ "resourceId": 1, "start": "2026-12-01T10:30:00Z", "end": "2026-12-01T11:30:00Z" }
+
+### Modificar reserva
+PUT {{host}}/bookings/1
+Content-Type: application/json
+
+{ "start": "2026-12-01T12:00:00Z", "end": "2026-12-01T13:00:00Z" }
+
+### Notificaciones
+GET {{host}}/notifications
+
+### Cancelar reserva
+DELETE {{host}}/bookings/1
